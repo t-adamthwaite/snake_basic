@@ -18,5 +18,13 @@
     <ClCompile Include="snake_basic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="serpent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="serpent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
