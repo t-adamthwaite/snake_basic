@@ -135,9 +135,11 @@
   <ItemGroup>
     <ClCompile Include="serpent.cpp" />
     <ClCompile Include="snake_basic.cpp" />
+    <ClCompile Include="target.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="serpent.h" />
+    <ClInclude Include="target.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,15 +1,23 @@
 #include "serpent.h"
+#include "target.h"
 #include <sstream>
 #include <cstdlib>
+#include <random>
+#include <time.h>
 #include <SFML\Graphics.hpp>
+
+using namespace std;
 
 int main() {
 	VideoMode vm(1920, 1200);
 	RenderWindow window(vm, "Snake", Style::Fullscreen);
 
+	srand(time(0));
+
 	int score = 0;
 
 	Snake snake(1920 / 2, 1200 / 2);
+	Target target(rand() % 1960, rand() % 1180);
 
 
 	//Clock
@@ -81,6 +89,7 @@ int main() {
 		//Draw
 		window.clear();
 		window.draw(snake.getShape());
+		window.draw(target.getShape());
 		window.display();
 	}
 
