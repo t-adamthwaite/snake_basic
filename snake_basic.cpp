@@ -31,7 +31,6 @@ int main() {
 			snake.stopLeft();
 			snake.stopUp();
 			snake.stopDown();
-			//Teleport if past confines of screen
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Left)) {
@@ -54,11 +53,30 @@ int main() {
 			snake.stopRight();
 			snake.stopUp();
 		}
+
+		
 		
 		//Update
 		
 		Time dt = clock.restart();
 		snake.update(dt);
+
+		//Teleport across screen
+		if (snake.getPosition().left > 1980) {
+			snake.resetPositionRight();
+		}
+
+		if (snake.getPosition().left < 0) {
+			snake.resetPositionLeft();
+		}
+
+		if (snake.getPosition().top < 0) {
+			snake.resetPositionUp();
+		}
+
+		if (snake.getPosition().top > 1200) {
+			snake.resetPositionDown();
+		}
 
 		//Draw
 		window.clear();

@@ -16,9 +16,6 @@ RectangleShape Snake::getShape() {
 	return m_Snake;
 }
 
-//Vector2f resetPosition() {
-	//Figure out how to teleport to opposite side later
-//}
 
 float Snake::getSpeed() {
 	return m_Speed;
@@ -48,6 +45,26 @@ void Snake::stopUp() {
 }
 void Snake::stopDown() {
 	m_MoveDown = false;
+}
+
+void Snake::resetPositionRight() {
+	m_Position.x = 0;
+	m_Position.y = m_Snake.getPosition().y;
+}
+
+void Snake::resetPositionLeft() {
+	m_Position.x = 1980;
+	m_Position.y = m_Snake.getPosition().y;
+}
+
+void Snake::resetPositionUp() {
+	m_Position.x = m_Snake.getPosition().x;
+	m_Position.y = 1200;
+}
+
+void Snake::resetPositionDown() {
+	m_Position.x = m_Snake.getPosition().x;
+	m_Position.y = 0;
 }
 
 

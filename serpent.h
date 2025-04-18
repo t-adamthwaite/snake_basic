@@ -18,7 +18,6 @@ public:
 	Snake(float startX, float startY);
 	FloatRect getPosition();
 	RectangleShape getShape();
-	//Vector2f resetPosition();
 
 	float getSpeed();
 
@@ -31,6 +30,11 @@ public:
 	void stopLeft();
 	void stopUp();
 	void stopDown();
+
+	void resetPositionRight();
+	void resetPositionLeft();
+	void resetPositionUp();
+	void resetPositionDown();
 
 	void grow();
 
