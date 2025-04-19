@@ -16,9 +16,8 @@ FloatRect Target::getPosition() {
 	return m_Target.getGlobalBounds();
 }
 
-void Target::reset(float x, float y) {
-	m_Position.x = x;
-	m_Position.y = y;
+void Target::reset(int x, int y) {
+	m_Target.setPosition(x, y);
 }
 
 void Target::update(Time dt) {

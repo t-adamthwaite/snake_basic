@@ -14,7 +14,7 @@ public:
 	RectangleShape getShape();
 	FloatRect getPosition();
 
-	void reset(float x, float y);
+	void reset(int x, int y);
 	
 	void update(Time dt);
 };
