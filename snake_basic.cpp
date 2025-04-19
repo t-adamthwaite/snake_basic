@@ -19,6 +19,14 @@ int main() {
 	Snake snake(1920 / 2, 1200 / 2);
 	Target target(rand() % 1960, rand() % 1180);
 
+	Text scores;
+	Font font;
+	font.loadFromFile("Fonts/DS-DIGIT.ttf");
+	scores.setFont(font);
+	scores.setCharacterSize(75);
+	scores.setFillColor(Color::White);
+	scores.setPosition(20, 20);
+
 
 	//Clock
 	Clock clock;
@@ -27,7 +35,7 @@ int main() {
 	while (window.isOpen()) {
 
 		Time gameTotal = clock.getElapsedTime();
-		Time lastPlayerInput;
+		Time lastHit;
 		//Handle Inputs
 		
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
@@ -69,6 +77,11 @@ int main() {
 		Time dt = clock.restart();
 		snake.update(dt);
 
+		//Score to screen
+		std::stringstream ss;
+		ss << "Score :   " << score;
+		scores.setString(ss.str());
+
 		//Teleport across screen
 		if (snake.getPosition().left > 1980) {
 			snake.resetPositionRight();
@@ -86,8 +99,17 @@ int main() {
 			snake.resetPositionDown();
 		}
 
+		if (snake.getPosition().intersects(target.getPosition()) /* && gameTotal.asSeconds() - lastHit.asSeconds() > 0.4*/) {
+			target.reset(rand() % 1960, rand() % 1180);
+			snake.grow();
+			score++;
+			//lastHit = gameTotal;
+
+		}
+
 		//Draw
 		window.clear();
+		window.draw(scores);
 		window.draw(snake.getShape());
 		window.draw(target.getShape());
 		window.display();
