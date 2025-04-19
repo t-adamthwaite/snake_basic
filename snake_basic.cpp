@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <random>
 #include <time.h>
-#include <iostream>
 #include <SFML\Graphics.hpp>
 
 using namespace std;
@@ -100,13 +99,13 @@ int main() {
 			snake.resetPositionDown();
 		}
 
-		if (snake.getPosition().intersects(target.getPosition()) /* && gameTotal.asSeconds() - lastHit.asSeconds() > 0.4*/) {
-			int x = rand() % 1960;
-			int y = rand() % 1180;
+		if (snake.getPosition().intersects(target.getPosition())) {
+			int x = (rand() % 1960) + 80;
+			int y = (rand() % 1180) + 80;
 			target.reset(x, y);
-			snake.grow();
+			snake.grow(score);
 			score++;
-			//lastHit = gameTotal;
+			
 
 		}
 

@@ -68,8 +68,9 @@ void Snake::resetPositionDown() {
 }
 
 
-void Snake::grow() {
-	//MORE HERE LATER
+void Snake::grow(int score) {
+	m_Snake.setSize(Vector2f(20, (score * 20) + 20));
+	//This works... but it isnt bendy... hard snake is no fun...
 }
 
 

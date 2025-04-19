@@ -19,7 +19,3 @@ FloatRect Target::getPosition() {
 void Target::reset(int x, int y) {
 	m_Target.setPosition(x, y);
 }
-
-void Target::update(Time dt) {
-	//More here later
-}

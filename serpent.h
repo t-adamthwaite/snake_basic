@@ -36,7 +36,7 @@ public:
 	void resetPositionUp();
 	void resetPositionDown();
 
-	void grow();
+	void grow(int score);
 
 	void update(Time dt);
 };

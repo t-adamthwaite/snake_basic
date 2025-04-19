@@ -15,6 +15,4 @@ public:
 	FloatRect getPosition();
 
 	void reset(int x, int y);
-	
-	void update(Time dt);
 };
