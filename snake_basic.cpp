@@ -12,6 +12,7 @@ using namespace std;
 int main() {
 	VideoMode vm(1920, 1200);
 	RenderWindow window(vm, "Snake", Style::Fullscreen);
+	window.setFramerateLimit(30);
 
 	srand(time(0));
 
@@ -37,9 +38,10 @@ int main() {
 	while (window.isOpen()) {
 
 		Time gameTotal = clock.getElapsedTime();
+		int msgt = gameTotal.asMilliseconds();
 		Time lastHit;
-		//Handle Inputs
-		
+			//Handle Inputs
+
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 			window.close();
 		}
@@ -72,10 +74,11 @@ int main() {
 			snake.stopUp();
 		}
 
-		
-		
+
 		//Update
 		
+		Vector2f oldPosition = snake.getCenter();
+
 		Time dt = clock.restart();
 		float fdt = dt.asSeconds();
 		snake.update(dt);
@@ -103,26 +106,29 @@ int main() {
 		}
 
 		Vector2f newPosition = snake.getCenter();
-		body.follow(fdt, newPosition);
+		if (snake.isMoving() == true) {
+			body.follow(fdt, oldPosition);
+		}
 
 		if (snake.getPosition().intersects(target.getPosition())) {
 			int x = (rand() % 1900);
 			int y = (rand() % 1180);
 			target.reset(x, y);
-			//snake.grow(score);
 			score++;
-			
-
+			body.grow(score, snake.getPosition().top + 20 * (score + 1), snake.getPosition().left + 20 * (score + 1));
 		}
+
+		
 
 		//Draw
 		window.clear();
 		window.draw(scores);
 		window.draw(snake.getShape());
-		window.draw(body.getShape());
+		for (int i = 0; i < score + 1; i++) {
+			window.draw(body.getShape());
+		}
 		window.draw(target.getShape());
 		window.display();
+		
 	}
-
-
 }

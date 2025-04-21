@@ -26,7 +26,9 @@ void Sbody::follow(float dt, Vector2f headSegment) {
 		if (i == 0) {
 			float X = headSegment.x;
 			float Y = headSegment.y;
-			if (X > m_Sbody[i].getPosition().x) {
+			m_Position.x = X;
+			m_Position.y = Y;
+			/*if (X > m_Sbody[i].getPosition().x) {
 				m_Position.x = m_Sbody[i].getPosition().x + m_Speed * dt;
 			}
 			if (X < m_Sbody[i].getPosition().x) {
@@ -37,10 +39,10 @@ void Sbody::follow(float dt, Vector2f headSegment) {
 			}
 			if (Y < m_Sbody[i].getPosition().y) {
 				m_Position.y = m_Sbody[i].getPosition().y - m_Speed * dt;
-			}
+			}*/
 			m_Sbody[i].setPosition(m_Position);
 		}
-		else {
+		/*else {
 			float X = m_Sbody[i - 1].getPosition().x;
 			float Y = m_Sbody[i - 1].getPosition().y;
 			if (X > m_Sbody[i].getPosition().x) {
@@ -56,12 +58,15 @@ void Sbody::follow(float dt, Vector2f headSegment) {
 				m_Position.y = m_Sbody[i].getPosition().y - m_Speed * dt;
 			}
 			m_Sbody[i].setPosition(m_Position);
-		}
+		}*/
 	}
 }
 
-void grow() {
-
+void Sbody::grow(int score, float headX, float headY) {
+	m_Position.x = headX;
+	m_Position.y = headY;
+	m_Sbody.push_back(RectangleShape(Vector2f(20, 20)));
+	m_Sbody[score].setPosition(m_Position);
 }
 
 void update() {

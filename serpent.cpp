@@ -50,6 +50,11 @@ void Snake::stopUp() {
 void Snake::stopDown() {
 	m_MoveDown = false;
 }
+bool Snake::isMoving() {
+	if (m_MoveRight == true || m_MoveLeft == true || m_MoveUp == true || m_MoveDown == true) {
+		return true;
+	}
+}
 
 void Snake::resetPositionRight() {
 	m_Position.x = 0;
