@@ -16,6 +16,10 @@ RectangleShape Snake::getShape() {
 	return m_Snake;
 }
 
+Vector2f Snake::getCenter() {
+	return m_Position;
+}
+
 
 float Snake::getSpeed() {
 	return m_Speed;
@@ -53,7 +57,7 @@ void Snake::resetPositionRight() {
 }
 
 void Snake::resetPositionLeft() {
-	m_Position.x = 1980;
+	m_Position.x = 1900;
 	m_Position.y = m_Snake.getPosition().y;
 }
 
@@ -68,10 +72,10 @@ void Snake::resetPositionDown() {
 }
 
 
-void Snake::grow(int score) {
+/*void Snake::grow(int score) {
 	m_Snake.setSize(Vector2f(20, (score * 20) + 20));
 	//This works... but it isnt bendy... hard snake is no fun...
-}
+}*/
 
 
 void Snake::update(Time dt) {

@@ -1,5 +1,6 @@
 #include "serpent.h"
 #include "target.h"
+#include "sbody.h"
 #include <sstream>
 #include <cstdlib>
 #include <random>
@@ -17,7 +18,8 @@ int main() {
 	int score = 0;
 
 	Snake snake(1920 / 2, 1200 / 2);
-	Target target(rand() % 1960, rand() % 1180);
+	Sbody body(snake.getPosition().left, snake.getPosition().top + 20, 0);
+	Target target(rand() % 1900, rand() % 1180);
 
 	Text scores;
 	Font font;
@@ -75,6 +77,7 @@ int main() {
 		//Update
 		
 		Time dt = clock.restart();
+		float fdt = dt.asSeconds();
 		snake.update(dt);
 
 		//Score to screen
@@ -83,7 +86,7 @@ int main() {
 		scores.setString(ss.str());
 
 		//Teleport across screen
-		if (snake.getPosition().left > 1980) {
+		if (snake.getPosition().left > 1920) {
 			snake.resetPositionRight();
 		}
 
@@ -99,11 +102,14 @@ int main() {
 			snake.resetPositionDown();
 		}
 
+		Vector2f newPosition = snake.getCenter();
+		body.follow(fdt, newPosition);
+
 		if (snake.getPosition().intersects(target.getPosition())) {
-			int x = (rand() % 1960) + 80;
-			int y = (rand() % 1180) + 80;
+			int x = (rand() % 1900);
+			int y = (rand() % 1180);
 			target.reset(x, y);
-			snake.grow(score);
+			//snake.grow(score);
 			score++;
 			
 
@@ -113,6 +119,7 @@ int main() {
 		window.clear();
 		window.draw(scores);
 		window.draw(snake.getShape());
+		window.draw(body.getShape());
 		window.draw(target.getShape());
 		window.display();
 	}
