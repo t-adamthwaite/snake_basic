@@ -12,7 +12,7 @@ using namespace std;
 int main() {
 	VideoMode vm(1920, 1200);
 	RenderWindow window(vm, "Snake", Style::Fullscreen);
-	window.setFramerateLimit(30);
+	window.setFramerateLimit(0);
 
 	srand(time(0));
 
@@ -105,9 +105,18 @@ int main() {
 			snake.resetPositionDown();
 		}
 
+		//Body follows head
 		Vector2f newPosition = snake.getCenter();
 		if (snake.isMoving() == true) {
 			body.follow(fdt, oldPosition);
+		}
+
+		//Body follows body
+		vector<RectangleShape> currentBody = body.getPieces();
+
+		if (body.getPieces().size() > 1) {
+			Vector2f newBodyPosition = body.getCenter(score - 1);
+			body.follow(fdt, newBodyPosition);
 		}
 
 		if (snake.getPosition().intersects(target.getPosition())) {
@@ -115,8 +124,10 @@ int main() {
 			int y = (rand() % 1180);
 			target.reset(x, y);
 			score++;
-			body.grow(score, snake.getPosition().top + 20 * (score + 1), snake.getPosition().left + 20 * (score + 1));
+			body.grow(score, currentBody[score - 1].getGlobalBounds().top + 20, currentBody[score - 1].getGlobalBounds().left + 20);
 		}
+
+
 
 		
 

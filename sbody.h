@@ -17,6 +17,9 @@ public:
 	Sbody(float startX, float startY, int score);
 	FloatRect getPosition(vector<RectangleShape> m_Sbody);
 	RectangleShape getShape();
+	vector<RectangleShape> getPieces();
+	Vector2f getCenter(int score);
+
 
 	void follow(float dt, Vector2f headSegment);
 	void grow(int score, float headX, float headY);

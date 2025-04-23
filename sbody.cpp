@@ -21,6 +21,14 @@ RectangleShape Sbody::getShape() {
 	}
 }
 
+vector<RectangleShape> Sbody::getPieces() {
+	return m_Sbody;
+}
+
+Vector2f Sbody::getCenter(int score) {
+	return m_Sbody[score].getOrigin();
+}
+
 void Sbody::follow(float dt, Vector2f headSegment) {
 	for (int i = 0; i < m_Sbody.size(); i++) {
 		if (i == 0) {
