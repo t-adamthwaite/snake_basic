@@ -25,35 +25,26 @@ vector<RectangleShape> Sbody::getPieces() {
 	return m_Sbody;
 }
 
-Vector2f Sbody::getCenter(int score) {
-	return m_Sbody[score].getPosition();
+Vector2f Sbody::getCenter(int i) {
+	return m_Sbody[i].getPosition();
 }
 
-void Sbody::followHead(float dt, Vector2f headSegment) {
-	for (int i = 0; i < m_Sbody.size(); i++) {
-		if (i == 0) {
-			float X = headSegment.x;
-			float Y = headSegment.y;
-			m_Sbody[i].setPosition(X, Y);
-		}
-	}
+void Sbody::followHead(float dt, Vector2f headSegment, vector<RectangleShape> currentBody) {
+			m_Sbody[0].setPosition(headSegment);
+			for (int i = 1; i < m_Sbody.size(); i++) {
+				m_Sbody[i].setPosition(currentBody[i-1].getPosition().x, currentBody[i - 1].getPosition().y);
+			}
 }
 
-void Sbody::followBody(Vector2f prevSegment) {
+void Sbody::followBody() {
 	for (int i = 1; i < m_Sbody.size(); i++) {
-		if (i >= 1) {
-			float X = prevSegment.x;
-			float Y = prevSegment.y;
-			m_Sbody[i].setPosition(X, Y);
-		}
+			m_Sbody[i].setPosition(m_Sbody[i-1].getPosition().x, m_Sbody[i - 1].getPosition().y);
 	}
 }
 
 void Sbody::grow(int score, float headX, float headY) {
-	m_Position.x = headX;
-	m_Position.y = headY;
 	m_Sbody.push_back(RectangleShape(Vector2f(20, 20)));
-	m_Sbody[score].setPosition(m_Position);
+	m_Sbody[score].setPosition(headX, headY);
 }
 
 void update() {

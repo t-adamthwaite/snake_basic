@@ -41,7 +41,7 @@ int main() {
 		Time gameTotal = clock.getElapsedTime();
 		int msgt = gameTotal.asMilliseconds();
 		Time lastHit;
-			//Handle Inputs
+		//Handle Inputs
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 			window.close();
@@ -77,7 +77,7 @@ int main() {
 
 
 		//Update
-		
+
 		Vector2f oldPosition = snake.getCenter();
 
 		Time dt = clock.restart();
@@ -106,19 +106,24 @@ int main() {
 			snake.resetPositionDown();
 		}
 
+
+		vector<RectangleShape> currentBody = body.getPieces();
+
 		//Body follows head
-		Vector2f newPosition = snake.getCenter();
-		if (snake.isMoving() == true) {
-			body.followHead(fdt, oldPosition);
+		if (score == 0) {
+			Vector2f newPosition = snake.getCenter();
+			if (snake.isMoving() == true) {
+				body.followHead(fdt, oldPosition, currentBody);
+			}
 		}
 
 		//Body follows body
-		vector<RectangleShape> currentBody = body.getPieces();
-
-		for (int i = 0; i < score; i++) {
-			Vector2f newBodyPosition = body.getCenter(score - 1);
-			if (body.getPieces().size() > 1) {
-				body.followBody(newBodyPosition);
+		
+		if (score > 0) {
+			Vector2f newPosition = snake.getCenter();
+			if (snake.isMoving() == true) {
+				body.followHead(fdt, oldPosition, currentBody);
+				//body.followBody();
 			}
 		}
 
@@ -139,7 +144,7 @@ int main() {
 		window.clear();
 		window.draw(scores);
 		window.draw(snake.getShape());
-		for (int i = 0; i < score + 1; i++) {
+		for (int i = 0; i < currentBody.size(); i++) {
 			window.draw(currentBody[i]);
 		}
 		window.draw(target.getShape());

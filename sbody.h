@@ -18,11 +18,11 @@ public:
 	FloatRect getPosition(vector<RectangleShape> m_Sbody);
 	RectangleShape getShape();
 	vector<RectangleShape> getPieces();
-	Vector2f getCenter(int score);
+	Vector2f getCenter(int i);
 
 
-	void followHead(float dt, Vector2f headSegment);
-	void followBody(Vector2f prevSegment);
+	void followHead(float dt, Vector2f headSegment, vector<RectangleShape> currentBody);
+	void followBody();
 
 	void grow(int score, float headX, float headY);
 	void update(Time dt);
