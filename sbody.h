@@ -21,7 +21,9 @@ public:
 	Vector2f getCenter(int score);
 
 
-	void follow(float dt, Vector2f headSegment);
+	void followHead(float dt, Vector2f headSegment);
+	void followBody(Vector2f prevSegment);
+
 	void grow(int score, float headX, float headY);
 	void update(Time dt);
 };

@@ -26,47 +26,26 @@ vector<RectangleShape> Sbody::getPieces() {
 }
 
 Vector2f Sbody::getCenter(int score) {
-	return m_Sbody[score].getOrigin();
+	return m_Sbody[score].getPosition();
 }
 
-void Sbody::follow(float dt, Vector2f headSegment) {
+void Sbody::followHead(float dt, Vector2f headSegment) {
 	for (int i = 0; i < m_Sbody.size(); i++) {
 		if (i == 0) {
 			float X = headSegment.x;
 			float Y = headSegment.y;
-			m_Position.x = X;
-			m_Position.y = Y;
-			/*if (X > m_Sbody[i].getPosition().x) {
-				m_Position.x = m_Sbody[i].getPosition().x + m_Speed * dt;
-			}
-			if (X < m_Sbody[i].getPosition().x) {
-				m_Position.x = m_Sbody[i].getPosition().x - m_Speed * dt;
-			}
-			if (Y > m_Sbody[i].getPosition().y) {
-				m_Position.y = m_Sbody[i].getPosition().y + m_Speed * dt;
-			}
-			if (Y < m_Sbody[i].getPosition().y) {
-				m_Position.y = m_Sbody[i].getPosition().y - m_Speed * dt;
-			}*/
-			m_Sbody[i].setPosition(m_Position);
+			m_Sbody[i].setPosition(X, Y);
 		}
-		/*else {
-			float X = m_Sbody[i - 1].getPosition().x;
-			float Y = m_Sbody[i - 1].getPosition().y;
-			if (X > m_Sbody[i].getPosition().x) {
-				m_Position.x = m_Sbody[i].getPosition().x + m_Speed * dt;
-			}
-			if (X < m_Sbody[i].getPosition().x) {
-				m_Position.x = m_Sbody[i].getPosition().x - m_Speed * dt;
-			}
-			if (Y > m_Sbody[i].getPosition().y) {
-				m_Position.y = m_Sbody[i].getPosition().y + m_Speed * dt;
-			}
-			if (Y < m_Sbody[i].getPosition().y) {
-				m_Position.y = m_Sbody[i].getPosition().y - m_Speed * dt;
-			}
-			m_Sbody[i].setPosition(m_Position);
-		}*/
+	}
+}
+
+void Sbody::followBody(Vector2f prevSegment) {
+	for (int i = 1; i < m_Sbody.size(); i++) {
+		if (i >= 1) {
+			float X = prevSegment.x;
+			float Y = prevSegment.y;
+			m_Sbody[i].setPosition(X, Y);
+		}
 	}
 }
 

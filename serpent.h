@@ -8,7 +8,7 @@ private:
 	RectangleShape m_Snake;
 	Vector2f m_Position;
 	//Movement
-	float m_Speed = 1500.0f;
+	float m_Speed = 400.0f;
 	bool m_MoveRight = false;
 	bool m_MoveLeft = false;
 	bool m_MoveUp = false;
