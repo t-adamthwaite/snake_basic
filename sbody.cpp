@@ -36,17 +36,7 @@ void Sbody::followHead(float dt, Vector2f headSegment, vector<RectangleShape> cu
 			}
 }
 
-void Sbody::followBody() {
-	for (int i = 1; i < m_Sbody.size(); i++) {
-			m_Sbody[i].setPosition(m_Sbody[i-1].getPosition().x, m_Sbody[i - 1].getPosition().y);
-	}
-}
-
 void Sbody::grow(int score, float headX, float headY) {
 	m_Sbody.push_back(RectangleShape(Vector2f(20, 20)));
 	m_Sbody[score].setPosition(headX, headY);
-}
-
-void update() {
-
 }

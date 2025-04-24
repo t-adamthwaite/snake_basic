@@ -76,13 +76,6 @@ void Snake::resetPositionDown() {
 	m_Position.y = 0;
 }
 
-
-/*void Snake::grow(int score) {
-	m_Snake.setSize(Vector2f(20, (score * 20) + 20));
-	//This works... but it isnt bendy... hard snake is no fun...
-}*/
-
-
 void Snake::update(Time dt) {
 	if (m_MoveRight) {
 		m_Position.x += m_Speed * dt.asSeconds();

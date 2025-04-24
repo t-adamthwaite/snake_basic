@@ -22,8 +22,5 @@ public:
 
 
 	void followHead(float dt, Vector2f headSegment, vector<RectangleShape> currentBody);
-	void followBody();
-
 	void grow(int score, float headX, float headY);
-	void update(Time dt);
 };

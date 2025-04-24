@@ -75,7 +75,6 @@ int main() {
 			snake.stopUp();
 		}
 
-
 		//Update
 
 		Vector2f oldPosition = snake.getCenter();
@@ -110,20 +109,10 @@ int main() {
 		vector<RectangleShape> currentBody = body.getPieces();
 
 		//Body follows head
-		if (score == 0) {
+		if (score >= 0) {
 			Vector2f newPosition = snake.getCenter();
 			if (snake.isMoving() == true) {
 				body.followHead(fdt, oldPosition, currentBody);
-			}
-		}
-
-		//Body follows body
-		
-		if (score > 0) {
-			Vector2f newPosition = snake.getCenter();
-			if (snake.isMoving() == true) {
-				body.followHead(fdt, oldPosition, currentBody);
-				//body.followBody();
 			}
 		}
 
