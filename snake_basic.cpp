@@ -132,13 +132,19 @@ int main() {
 			int y = (rand() % 1180);
 			target.reset(x, y);
 			score++;
-			body.grow(score, currentBody[score - 1].getGlobalBounds().top + 20, currentBody[score - 1].getGlobalBounds().left + 20);
-			std::cout << body.getPieces().size();
+			body.grow(score, -80, -80);
 		}
 
 		currentBody = body.getPieces();
 
-		
+		for (int i = 0; i < currentBody.size(); i++) {
+			if (snake.getPosition().intersects(currentBody[i].getGlobalBounds())) {
+				snake.stopDown();
+				snake.stopUp();
+				snake.stopRight();
+				snake.stopLeft();
+			}
+		}
 
 		//Draw
 		window.clear();
