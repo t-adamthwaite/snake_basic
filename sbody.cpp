@@ -4,7 +4,8 @@
 
 Sbody::Sbody(float startX, float startY, int score) : m_Position(startX, startY) {
 
-	m_Sbody.push_back(RectangleShape(Vector2f(20, 20)));
+	m_Sbody.push_back(RectangleShape(Vector2f(35, 35)));
+	m_Sbody[score].setFillColor(Color::Green);
 	m_Sbody[score].setPosition(m_Position);
 
 }
@@ -29,7 +30,7 @@ Vector2f Sbody::getCenter(int i) {
 	return m_Sbody[i].getPosition();
 }
 
-void Sbody::followHead(float dt, Vector2f headSegment, vector<RectangleShape> currentBody) {
+void Sbody::followHead(Vector2f headSegment, vector<RectangleShape> currentBody) {
 			m_Sbody[0].setPosition(headSegment);
 			for (int i = 1; i < m_Sbody.size(); i++) {
 				m_Sbody[i].setPosition(currentBody[i-1].getPosition().x, currentBody[i - 1].getPosition().y);
@@ -37,6 +38,7 @@ void Sbody::followHead(float dt, Vector2f headSegment, vector<RectangleShape> cu
 }
 
 void Sbody::grow(int score, float headX, float headY) {
-	m_Sbody.push_back(RectangleShape(Vector2f(20, 20)));
+	m_Sbody.push_back(RectangleShape(Vector2f(35, 35)));
+	m_Sbody[score].setFillColor(Color::Green);
 	m_Sbody[score].setPosition(headX, headY);
 }

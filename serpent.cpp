@@ -4,7 +4,8 @@
 //Constructor
 Snake::Snake(float startX, float startY) : m_Position(startX, startY) {
 
-	m_Snake.setSize(Vector2f(20, 20));
+	m_Snake.setSize(Vector2f(35, 35));
+	m_Snake.setFillColor(Color::Green);
 	m_Snake.setPosition(m_Position);
 }
 

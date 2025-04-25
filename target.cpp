@@ -4,7 +4,8 @@
 
 Target::Target(float startX, float startY) : m_Position(startX, startY) {
 
-	m_Target.setSize(Vector2f(20, 20));
+	m_Target.setSize(Vector2f(40, 40));
+	m_Target.setFillColor(Color::Red);
 	m_Target.setPosition(m_Position);
 }
 

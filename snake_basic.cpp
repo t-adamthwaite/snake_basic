@@ -80,7 +80,6 @@ int main() {
 		Vector2f oldPosition = snake.getCenter();
 
 		Time dt = clock.restart();
-		float fdt = dt.asSeconds();
 		snake.update(dt);
 
 		//Score to screen
@@ -112,7 +111,7 @@ int main() {
 		if (score >= 0) {
 			Vector2f newPosition = snake.getCenter();
 			if (snake.isMoving() == true) {
-				body.followHead(fdt, oldPosition, currentBody);
+				body.followHead(oldPosition, currentBody);
 			}
 		}
 
@@ -137,12 +136,12 @@ int main() {
 
 		//Draw
 		window.clear();
-		window.draw(scores);
 		window.draw(snake.getShape());
 		for (int i = 0; i < currentBody.size(); i++) {
 			window.draw(currentBody[i]);
 		}
 		window.draw(target.getShape());
+		window.draw(scores);
 		window.display();
 		
 	}
