@@ -133,11 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sbody.cpp" />
     <ClCompile Include="serpent.cpp" />
     <ClCompile Include="snake_basic.cpp" />
     <ClCompile Include="target.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sbody.h" />
     <ClInclude Include="serpent.h" />
     <ClInclude Include="target.h" />
   </ItemGroup>

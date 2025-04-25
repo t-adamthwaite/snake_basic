@@ -8,7 +8,7 @@ private:
 	RectangleShape m_Snake;
 	Vector2f m_Position;
 	//Movement
-	float m_Speed = 500.0f;
+	float m_Speed = 400.0f;
 	bool m_MoveRight = false;
 	bool m_MoveLeft = false;
 	bool m_MoveUp = false;
@@ -18,6 +18,7 @@ public:
 	Snake(float startX, float startY);
 	FloatRect getPosition();
 	RectangleShape getShape();
+	Vector2f getCenter();
 
 	float getSpeed();
 
@@ -31,12 +32,13 @@ public:
 	void stopUp();
 	void stopDown();
 
+	bool isMoving();
+
 	void resetPositionRight();
 	void resetPositionLeft();
 	void resetPositionUp();
 	void resetPositionDown();
 
-	void grow(int score);
 
 	void update(Time dt);
 };

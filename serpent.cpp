@@ -4,7 +4,8 @@
 //Constructor
 Snake::Snake(float startX, float startY) : m_Position(startX, startY) {
 
-	m_Snake.setSize(Vector2f(20, 20));
+	m_Snake.setSize(Vector2f(35, 35));
+	m_Snake.setFillColor(Color::Green);
 	m_Snake.setPosition(m_Position);
 }
 
@@ -14,6 +15,10 @@ FloatRect Snake::getPosition() {
 
 RectangleShape Snake::getShape() {
 	return m_Snake;
+}
+
+Vector2f Snake::getCenter() {
+	return m_Position;
 }
 
 
@@ -46,6 +51,11 @@ void Snake::stopUp() {
 void Snake::stopDown() {
 	m_MoveDown = false;
 }
+bool Snake::isMoving() {
+	if (m_MoveRight == true || m_MoveLeft == true || m_MoveUp == true || m_MoveDown == true) {
+		return true;
+	}
+}
 
 void Snake::resetPositionRight() {
 	m_Position.x = 0;
@@ -53,7 +63,7 @@ void Snake::resetPositionRight() {
 }
 
 void Snake::resetPositionLeft() {
-	m_Position.x = 1980;
+	m_Position.x = 1900;
 	m_Position.y = m_Snake.getPosition().y;
 }
 
@@ -66,13 +76,6 @@ void Snake::resetPositionDown() {
 	m_Position.x = m_Snake.getPosition().x;
 	m_Position.y = 0;
 }
-
-
-void Snake::grow(int score) {
-	m_Snake.setSize(Vector2f(20, (score * 20) + 20));
-	//This works... but it isnt bendy... hard snake is no fun...
-}
-
 
 void Snake::update(Time dt) {
 	if (m_MoveRight) {

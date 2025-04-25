@@ -24,12 +24,18 @@
     <ClCompile Include="target.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="serpent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="target.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sbody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

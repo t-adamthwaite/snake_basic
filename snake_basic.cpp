@@ -1,5 +1,7 @@
 #include "serpent.h"
 #include "target.h"
+#include "sbody.h"
+#include <iostream>
 #include <sstream>
 #include <cstdlib>
 #include <random>
@@ -11,13 +13,15 @@ using namespace std;
 int main() {
 	VideoMode vm(1920, 1200);
 	RenderWindow window(vm, "Snake", Style::Fullscreen);
+	window.setFramerateLimit(10);
 
 	srand(time(0));
 
 	int score = 0;
 
 	Snake snake(1920 / 2, 1200 / 2);
-	Target target(rand() % 1960, rand() % 1180);
+	Sbody body(snake.getPosition().left, snake.getPosition().top + 20, 0);
+	Target target(rand() % 1900, rand() % 1180);
 
 	Text scores;
 	Font font;
@@ -35,9 +39,10 @@ int main() {
 	while (window.isOpen()) {
 
 		Time gameTotal = clock.getElapsedTime();
+		int msgt = gameTotal.asMilliseconds();
 		Time lastHit;
 		//Handle Inputs
-		
+
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) {
 			window.close();
 		}
@@ -70,10 +75,10 @@ int main() {
 			snake.stopUp();
 		}
 
-		
-		
 		//Update
-		
+
+		Vector2f oldPosition = snake.getCenter();
+
 		Time dt = clock.restart();
 		snake.update(dt);
 
@@ -83,7 +88,7 @@ int main() {
 		scores.setString(ss.str());
 
 		//Teleport across screen
-		if (snake.getPosition().left > 1980) {
+		if (snake.getPosition().left > 1920) {
 			snake.resetPositionRight();
 		}
 
@@ -99,23 +104,45 @@ int main() {
 			snake.resetPositionDown();
 		}
 
-		if (snake.getPosition().intersects(target.getPosition())) {
-			int x = (rand() % 1960) + 80;
-			int y = (rand() % 1180) + 80;
-			target.reset(x, y);
-			snake.grow(score);
-			score++;
-			
 
+		vector<RectangleShape> currentBody = body.getPieces();
+
+		//Body follows head
+		if (score >= 0) {
+			Vector2f newPosition = snake.getCenter();
+			if (snake.isMoving() == true) {
+				body.followHead(oldPosition, currentBody);
+			}
+		}
+
+		if (snake.getPosition().intersects(target.getPosition())) {
+			int x = (rand() % 1900);
+			int y = (rand() % 1180);
+			target.reset(x, y);
+			score++;
+			body.grow(score, -80, -80);
+		}
+
+		currentBody = body.getPieces();
+
+		for (int i = 0; i < currentBody.size(); i++) {
+			if (snake.getPosition().intersects(currentBody[i].getGlobalBounds())) {
+				snake.stopDown();
+				snake.stopUp();
+				snake.stopRight();
+				snake.stopLeft();
+			}
 		}
 
 		//Draw
 		window.clear();
-		window.draw(scores);
 		window.draw(snake.getShape());
+		for (int i = 0; i < currentBody.size(); i++) {
+			window.draw(currentBody[i]);
+		}
 		window.draw(target.getShape());
+		window.draw(scores);
 		window.display();
+		
 	}
-
-
 }
